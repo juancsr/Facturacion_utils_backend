@@ -14,6 +14,12 @@ cns_gcp = {
     connectString: "35.224.188.248/XEPDB1",
 }
 
+cns_gcp_local = {
+    user: "hr",
+    password: "oracle2021",
+    connectString: "10.128.0.2/XEPDB1",
+}
+
 const env = process.env.ENV || 'DEV';
 
 async function Open(sql, binds, autoCommit) {
@@ -27,6 +33,9 @@ async function Open(sql, binds, autoCommit) {
         case 'DEV':
             console.log('running in DEV environment')
             cnn = await oracledb.getConnection(cns);
+        case 'LOCAL_PROD':
+            console.log('running in LOCAL_DEV environment')
+            cnn = await oracledb.getConnection(cns_gcp_local);
         default:
             cnn = await oracledb.getConnection(cns);
             break;
