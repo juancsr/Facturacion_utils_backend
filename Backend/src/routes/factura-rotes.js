@@ -2,18 +2,12 @@ const { Router } = require('express');
 const router = Router();
 const BD = require('../config/configbd');
 const { exec } = require("child_process");
+const GCP_UTILS = require('./gcp_utils');
 
-router.get('/getPDF', async (req, res) => { //get y post => nombre apellido js sincrono
-    //sql = "SELECT nombres||' '||apellidos from persona WHERE STATE=1";
-    sql = `BEGIN PR_Test(); END;`;
-
-    //nombre,descripcion,precio_unidad,id_categoria
-    let result = await BD.Open(sql, [], false);
-   
-    //facturas = [];
-
-    
-    res.json("exito");
+router.post('/uploadFileToBucket', async (req, res) => { //get y post => nombre apellido js sincrono
+    const { filename } = req;
+    console.log('uploading...');
+    // GCP_UTILS.uploadFile(filename);
 })
 
 
